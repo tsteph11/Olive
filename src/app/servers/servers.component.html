@@ -6,14 +6,21 @@ class="form-control"
 <input type="text" 
 class="form-control"
 [(ngModel)]="serverName">
-<p>{{this.serverName}}</p>
 
 
 <button class="btn btn-primary" 
 [disabled]="!allowNewServer" 
 (click)="onCreateServer()">Add Server</button>
 
-<p>{{ serverCreationStatus }}</p>
+<button class="btn btn-warning"
+[disabled]="serverName === ''"
+(click)="onResetServer()">Reset Server</button>
+
+<p *ngIf="serverCreated; else noServer">{{ serverCreationStatus }}</p>
+<ng-template #noServer>
+    <p>No Server was created!</p>
+</ng-template>
 <app-server></app-server>
 <app-server></app-server>
 <app-server></app-server>
+
